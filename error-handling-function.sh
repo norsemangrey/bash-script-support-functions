@@ -22,7 +22,7 @@ handleError() {
     local error=$(cat "${errorFile}" | sed "s|${callingScript}: ||g")
 
     # Source external logger
-    source "./logging-and-output-function.sh"
+    source $(dirname "${BASH_SOURCE[0]}")"/logging-and-output-function.sh"
 
     # Log the error without the script name prefix
     logMessage "${errorMessage} (${error})" "ERROR"

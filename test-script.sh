@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # Set external logger- and error handling script paths
-externalLogger="./logging-and-output-function.sh"
-externalErrorHandler="./error-handling-function.sh"
+# Getting absolute path as script might be called from another script
+externalLogger=$(dirname "${BASH_SOURCE[0]}")"/logging-and-output-function.sh"
+externalErrorHandler=$(dirname "${BASH_SOURCE[0]}")"/error-handling-function.sh"
 
 # Source external logger and error handler (but allow execution without them)
 source "${externalErrorHandler}" "Test script failed" || true
