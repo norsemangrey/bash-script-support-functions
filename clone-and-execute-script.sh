@@ -1,15 +1,16 @@
 #!/bin/bash
 
-
+# Usage function.
 usage() {
     echo ""
     echo "Usage: $0 [OPTIONS]"
     echo ""
     echo "Options:"
-    echo "  -u, --url               URL of the Git repository to clone or update"
-    echo "  -r, --root              Base directory where the repository will be cloned"
-    echo "  -e, --executable        Name of the executable file to run within the repository"
+    echo "  -u, --url               URL of the Git repository to clone or update."
+    echo "  -r, --root              Base directory where the repository will be cloned."
+    echo "  -e, --executable        Name of the executable file to run within the repository."
     echo "  -d, --debug             Turns on detailed console output."
+    echo "  -v, --verbose           Shows standards output from commands."
     echo "  -h, --help              Show this help message and exit."
     echo ""
 }
@@ -30,6 +31,10 @@ while [[ $# -gt 0 ]]; do
             shift 2
             ;;
         -d|--debug)
+            debug=true
+            shift
+            ;;
+        -v|--verbose)
             debug=true
             shift
             ;;
@@ -65,7 +70,7 @@ source "${externalLogger}" || true
 # Redirect output functions if not debug enabled
 run() {
 
-    if [[ "${debug}" == "true" ]]; then
+    if [[ "${verbose}" == "true" ]]; then
 
         "$@"
 
