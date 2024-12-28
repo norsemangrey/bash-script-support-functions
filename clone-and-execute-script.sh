@@ -35,7 +35,7 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         -v|--verbose)
-            debug=true
+            verbose=true
             shift
             ;;
         -h|--help)
