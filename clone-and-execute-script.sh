@@ -89,24 +89,24 @@ repoDirectory="${baseDirectory}/${repoName}"
 # Check if the repository already exists
 if [[ ! -d "${repoDirectory}" ]]; then
 
-    logMessage "Cloning the repository (${repositoryUrl})..." "INFO"
+    logMessage "Cloning repository '${repoName}'..." "INFO"
 
     # Clone the repository along with all submodules
     run git clone --recurse-submodules "${repositoryUrl}" "${repoDirectory}"
 
     if [[ $? -ne 0 ]]; then
 
-        logMessage "Failed to clone the repository." "ERROR"
+        logMessage "Failed to clone repository '${repoDirectory}'." "ERROR"
 
         exit 1
 
     fi
 
-    logMessage "Successfully cloned the repository." "INFO"
+    logMessage "Successfully cloned repository '${repoName}'." "DEBUG"
 
 else
 
-    logMessage "The repository already exists locally. Attempting to update..." "DEBUG"
+    logMessage "Repository already exists locally. Attempting to update '${repoName}'..." "DEBUG"
 
     # Pull the latest changes
     run git -C "${repoDirectory}" pull
@@ -116,37 +116,37 @@ else
 
     if [[ $? -ne 0 ]]; then
 
-        logMessage "Failed to update the repository." "WARNING"
+        logMessage "Failed to update repository '${repoName}'." "WARNING"
 
     fi
 
-    logMessage "Successfully updated the repository." "INFO"
+    logMessage "Successfully updated repository '${repoName}'." "DEBUG"
 
 fi
 
 # Set executable file path
-executableFile="${repoDirectory}/${executableFile}"
+executablePath="${repoDirectory}/${executableFile}"
 
 # Ensure the executable file is present and executable
-if [[ -f "${executableFile}" ]]; then
+if [[ -f "${executablePath}" ]]; then
 
-    logMessage "Setting execute permissions on the script file (${executableFile})..." "DEBUG"
+    logMessage "Setting execute permissions on file '${executablePath}'..." "DEBUG"
 
     # Set permissions on the script to execute
-    chmod +x "${executableFile}"
+    chmod +x "${executablePath}"
 
-    logMessage "Executing the script (${executableFile})..." "INFO"
+    logMessage "Executing script '${executableFile}'..." "INFO"
 
     # Execute the script
-    "${executableFile}"
+    "${executablePath}"
 
     if [[ $? -eq 0 ]]; then
 
-        logMessage "Script executed successfully." "INFO"
+        logMessage "Executed '${executableFile}' successfully." "DEBUG"
 
     else
 
-        logMessage "Script execution failed." "WARNING"
+        logMessage "Execution of '${executablePath}' failed." "WARNING"
 
     fi
 
