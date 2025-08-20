@@ -66,3 +66,5 @@ logMessage() {
     echo "$formattedMessage" >> "$logFile"
 
 }
+
+logMessage "External logger initialized. Logging to file: ${logFile}" "DEBUG"
