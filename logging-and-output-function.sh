@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Determine the log directory (check for env called LOG_PATH else use local)
-logDirectory="${LOG_PATH:-$(dirname "$(realpath "${BASH_SOURCE[1]}")")}"
+logDirectory="${LOG_PATH:-${HOME}/logs}"
 
 # Set the log file path
 logFile="${logDirectory}/$(basename "${BASH_SOURCE[1]}" .sh).log"
